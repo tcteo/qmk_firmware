@@ -18,3 +18,6 @@ SPLIT_KEYBOARD = yes
 SERIAL_DRIVER = usart
 
 OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
+
+RGB_MATRIX_CUSTOM_USER = yes # includes rgb_matrix_user.inc
+CONSOLE_ENABLE = yes
