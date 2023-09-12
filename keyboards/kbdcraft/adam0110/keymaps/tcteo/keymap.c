@@ -52,31 +52,33 @@ void eeconfig_init_user(void) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
+    #ifdef CONSOLE_ENABLE
     xprintf("Layer State: 0b%0b (%u)\n", state, get_highest_layer(state));
     switch (get_highest_layer(state)) {
         case _BASE:
-            xprintf("_BASE\n");
+            xprintf("Layer: _BASE\n");
             break;
         case _AAPL:
-            xprintf("layer: _AAPL\n");
+            xprintf("Layer: _AAPL\n");
             break;
         case _FN1:
-            xprintf("layer: _FN1\n");
+            xprintf("Layer: _FN1\n");
             break;
         case _FN2:
-            xprintf("layer: _FN2\n");
+            xprintf("Layer: _FN2\n");
             break;
         case _FN3:
-            xprintf("layer: _FN3\n");
+            xprintf("Layer: _FN3\n");
             break;
         default:
-            xprintf("layer: ???\n");
+            xprintf("Layer: ???\n");
             break;
     }
+    #endif // CONSOLE_ENABLE
 
+    // Indicate layer with top-left LED color.
     int led_num = 50;
     rgb_matrix_set_color_all(0,0,0); // all off
-    // rgb_matrix_set_color(led_num, 0x00, 0x00, 0x00); // off
     switch (get_highest_layer(state)) {
         case _BASE:
             rgb_matrix_set_color(led_num, 0x00, 0x00, 0xFF); // blue
@@ -116,7 +118,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void keyboard_post_init_user(void) {
-    // rgb_matrix_enable();
     debug_enable=true;
     debug_matrix=false;
     debug_keyboard=false;
@@ -132,6 +133,3 @@ void keyboard_post_init_user(void) {
 
 #undef NO_DEBUG
 #undef NO_PRINT
-
-
-
