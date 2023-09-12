@@ -95,32 +95,23 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         break;
     }
 
-
     int led_num = 50;
+    rgb_matrix_set_color_all(0,0,0); // all off
+    // rgb_matrix_set_color(led_num, 0x00, 0x00, 0x00); // off
     switch (get_highest_layer(state)) {
       case _BASE:
-    //     rgb_matrix_set_color_all(0,0,0);
-    //     rgb_matrix_set_color_all(0xFF, 0x00, 0x00); // red
         rgb_matrix_set_color(led_num, 0x00, 0x00, 0xFF); // blue
         break;
       case _BASE_AAPL:
-    //     rgb_matrix_set_color_all(0,0,0);
-    //     rgb_matrix_set_color_all(0x00, 0xFF, 0x00); // green
         rgb_matrix_set_color(led_num, 0xFF, 0x00, 0x00); // red
         break;
       case _FN1:
-    //     rgb_matrix_set_color_all(0,0,0);
-    //     rgb_matrix_set_color_all(0x00, 0x00, 0xFF); // blue
         rgb_matrix_set_color(led_num, 0x00, 0xFF, 0x00); // green
         break;
       case _FN2:
-    //     rgb_matrix_set_color_all(0,0,0);
-    //     rgb_matrix_set_color_all(0xFF, 0x00, 0xFF); // magenta
         rgb_matrix_set_color(led_num, 0xFF, 0x00, 0xFF); // magenta
         break;
       default:
-    //     rgb_matrix_set_color_all(0,0,0);
-    //     rgb_matrix_set_color_all(0xFF, 0xFF, 0xFF); // white
         rgb_matrix_set_color(led_num, 0xFF, 0xFF, 0xFF); // white
         break;
     }
@@ -197,16 +188,15 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 void keyboard_post_init_user(void) {
     // rgb_matrix_enable();
-  // Customise these values to desired behaviour
-  debug_enable=true;
-  debug_matrix=false;
-  debug_keyboard=false;
-  //debug_mouse=true;
+    debug_enable=true;
+    debug_matrix=false;
+    debug_keyboard=false;
+    debug_mouse=false;
 
-//   rgb_matrix_mode(RGB_MATRIX_CUSTOM_empty_effect);
-  rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_empty_effect);
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_empty_effect);
 
-
+    layer_clear();
+    layer_on(_BASE);
 }
 
 #undef NO_DEBUG
