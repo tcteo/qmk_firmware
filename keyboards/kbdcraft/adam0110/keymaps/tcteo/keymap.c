@@ -47,42 +47,42 @@ void eeconfig_init_user(void) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     xprintf("Layer State: 0b%0b (%u)\n", state, get_highest_layer(state));
     switch (get_highest_layer(state)) {
-      case _BASE:
-        xprintf("_BASE\n");
-        break;
-      case _BASE_AAPL:
-        xprintf("layer: _BASE_AAPL\n");
-        break;
-      case _FN1:
-        xprintf("layer: _FN1\n");
-        break;
-      case _FN2:
-        xprintf("layer: _FN2\n");
-        break;
-      default:
-        xprintf("layer: ???\n");
-        break;
+        case _BASE:
+            xprintf("_BASE\n");
+            break;
+        case _BASE_AAPL:
+            xprintf("layer: _BASE_AAPL\n");
+            break;
+        case _FN1:
+            xprintf("layer: _FN1\n");
+            break;
+        case _FN2:
+            xprintf("layer: _FN2\n");
+            break;
+        default:
+            xprintf("layer: ???\n");
+            break;
     }
 
     int led_num = 50;
     rgb_matrix_set_color_all(0,0,0); // all off
     // rgb_matrix_set_color(led_num, 0x00, 0x00, 0x00); // off
     switch (get_highest_layer(state)) {
-      case _BASE:
-        rgb_matrix_set_color(led_num, 0x00, 0x00, 0xFF); // blue
-        break;
-      case _BASE_AAPL:
-        rgb_matrix_set_color(led_num, 0xFF, 0x00, 0x00); // red
-        break;
-      case _FN1:
-        rgb_matrix_set_color(led_num, 0x00, 0xFF, 0x00); // green
-        break;
-      case _FN2:
-        rgb_matrix_set_color(led_num, 0xFF, 0x00, 0xFF); // magenta
-        break;
-      default:
-        rgb_matrix_set_color(led_num, 0xFF, 0xFF, 0xFF); // white
-        break;
+        case _BASE:
+            rgb_matrix_set_color(led_num, 0x00, 0x00, 0xFF); // blue
+            break;
+        case _BASE_AAPL:
+            rgb_matrix_set_color(led_num, 0xFF, 0x00, 0x00); // red
+            break;
+        case _FN1:
+            rgb_matrix_set_color(led_num, 0x00, 0xFF, 0x00); // green
+            break;
+        case _FN2:
+            rgb_matrix_set_color(led_num, 0xFF, 0x00, 0xFF); // magenta
+            break;
+        default:
+            rgb_matrix_set_color(led_num, 0xFF, 0xFF, 0xFF); // white
+            break;
     }
 
     return state;
