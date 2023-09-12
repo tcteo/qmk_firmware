@@ -78,6 +78,10 @@
     "split": {
         "enabled": true,
         "soft_serial_pin": "A9",
+        "transport": {
+            "protocol": "serial_usart",
+            "sync_matrix_state": true
+        }
     },
     "matrix_pins": {
         "cols": ["C10", "C11", "C12", "A15", "B6", "D2", "B3", "B4", "B5", "B7", "A0", "A1", "A2", "A3"],

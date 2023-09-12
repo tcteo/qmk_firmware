@@ -1,15 +1,7 @@
-// Copyright 2023 FxStudio <FXS@fx-studio.cn>
-// SPDX-License-Identifier: GPL-2.0-or-later
-
 #pragma once
 
-// #define DYNAMIC_KEYMAP_LAYER_COUNT 3
-
-// #define MATRIX_ROWS 10
-// #define MATRIX_COLS 14
-
-// #define MATRIX_ROW_PINS { C8, C7, C6, B15, B14 }
-// #define MATRIX_COL_PINS { C10, C11, C12, A15, B6, D2, B3, B4, B5, B7, A0, A1, A2, A3 }
+#define MATRIX_ROWS 10
+#define MATRIX_COLS 14
 
 #define MATRIX_ROW_PINS_RIGHT { A7, C4, C5, A4, A5 }
 #define MATRIX_COL_PINS_RIGHT { A6, B0, B1, B4, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
@@ -20,7 +12,6 @@
 #define SPLIT_WATCHDOG_ENABLE
 //#define SPLIT_MAX_CONNECTION_ERRORS 20
 
-#define SPLIT_TRANSPORT_MIRROR
 #define SPLIT_ACTIVITY_ENABLE
 
 /* Disable RGB lighting when PC is in suspend */
@@ -49,7 +40,5 @@
 #define RGB_MATRIX_KEYPRESSES
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_COLOR
-
-// #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_CUSTOM_empty_effect
 
 #endif
