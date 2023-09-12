@@ -1,3 +1,6 @@
+// Copyright 2023 TC Teo (@tcteo)
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 RGB_MATRIX_EFFECT(empty_effect)
 
 #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS

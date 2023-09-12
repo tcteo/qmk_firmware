@@ -1,3 +1,8 @@
+// Copyright 2023 TC Teo (@tcteo)
+// Copyright 2023 Andy McCallum (@mandoonandy)
+// Copyright 2023 FxStudio <FXS@fx-studio.cn>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 #include "adam0110.h"
 
 #ifdef RGB_MATRIX_ENABLE

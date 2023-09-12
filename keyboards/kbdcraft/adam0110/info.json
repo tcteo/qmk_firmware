@@ -3,7 +3,8 @@
     "bootloader": "tinyuf2",
     "keyboard_name": "Adam0110",
     "manufacturer": "KBDCRAFT",
-    "maintainer": "KBDCRAFT",
+    "maintainer": "qmk",
+    "url": "https://kbdcraft.store/products/adam",
     "diode_direction": "ROW2COL",
     "build": {
         "lto": false
@@ -68,7 +69,6 @@
         "nkro": false,
         "rgb_matrix": true
     },
-    "url": "",
     "usb": {
         "device_version": "0.0.0",
         "vid": "0x586A",
