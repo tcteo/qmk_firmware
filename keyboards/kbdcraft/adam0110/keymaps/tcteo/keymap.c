@@ -40,38 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
-// bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-//   uint8_t layer = get_highest_layer(layer_state|default_layer_state);
-//   switch (layer) {
-//     case _BASE:
-//       rgb_matrix_set_color(0, 0x00, 0xFF, 0x00); // base: green
-//       break;
-//     case _BASE_AAPL:
-//       rgb_matrix_set_color(0, 0xFF, 0x00, 0x00); // apple: red
-//       break;
-//     case _FN1:
-//       rgb_matrix_set_color(0, 0x00, 0x00, 0xFF); // fn1: blue
-//       break;
-//     case _FN2:
-//       rgb_matrix_set_color(0, 0xFF, 0x00, 0xFF); // fn2: magenta
-//       break;
-//     default:
-//       //rgb_matrix_set_color(0, 0x00, 0x00, 0x00); // off
-//       rgb_matrix_set_color(0, 0xFF, 0xFF, 0xFF); // white
-//       break;
-//   }
-//   if (host_keyboard_led_state().caps_lock) {
-//     for (uint8_t i = led_min; i < led_max; i++) {
-//       if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
-//         rgb_matrix_set_color(i, RGB_RED);
-//       }
-//     }
-//   }
-//   return false;
-// }
-
-void eeconfig_init_user(void) {  // EEPROM is getting reset
-    // rgb_matrix_enable();
+void eeconfig_init_user(void) {
     rgb_matrix_enable_noeeprom();
 }
 
@@ -116,75 +85,22 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         break;
     }
 
-
     return state;
 }
 
-//     int led_num = 50;
-//     uint8_t layer = get_highest_layer(state);
-//     dprintf("layer: %d\n", layer);
-//     return state;
-// }
-
-
-// bool rgb_matrix_indicators_user(void) {
-//     int led_num = 50;
-
-//     switch (get_highest_layer(layer_state)) {
-//       case _BASE:
-//         // rgb_matrix_set_color_all(0,0,0);
-//         // rgb_matrix_set_color_all(0x00, 0x00, 0xFF); // blue
-//         rgb_matrix_set_color(led_num, 0x00, 0x00, 0xFF); // blue
-//         break;
-//       case _BASE_AAPL:
-//         // rgb_matrix_set_color_all(0,0,0);
-//         // rgb_matrix_set_color_all(0xFF, 0x00, 0x00); // red
-//         rgb_matrix_set_color(led_num, 0xFF, 0x00, 0x00); // red
-//         break;
-//       case _FN1:
-//         // rgb_matrix_set_color_all(0,0,0);
-//         // rgb_matrix_set_color_all(0x00, 0xFF, 0x00); // green
-//         rgb_matrix_set_color(led_num, 0x00, 0xFF, 0x00); // green
-//         break;
-//       case _FN2:
-//         // rgb_matrix_set_color_all(0,0,0);
-//         // rgb_matrix_set_color_all(0xFF, 0x00, 0xFF); // magenta
-//         rgb_matrix_set_color(led_num, 0xFF, 0x00, 0xFF); // magenta
-//         break;
-//       default:
-//         // rgb_matrix_set_color_all(0,0,0);
-//         // rgb_matrix_set_color_all(0xFF, 0xFF, 0xFF); // white
-//         rgb_matrix_set_color(led_num, 0xFF, 0xFF, 0xFF); // white
-//         break;
-//     }
-//   return false;
-// }
-
-    // int led_num = 50;
-    // if (false) {
-    //     return true;
-    // } else if (IS_LAYER_ON(_FN1)) {
-    //     dprint("fn1");
-    //     rgb_matrix_set_color(led_num, 0x00, 0x00, 0xFF); // fn1: blue
-    //     rgb_matrix_set_color_all(0x00, 0x00, 0xFF); // fn1: blue
-    // } else if (IS_LAYER_ON(_FN2)) {
-    //     dprint("fn2");
-    //     rgb_matrix_set_color(led_num, 0xFF, 0x00, 0xFF); // fn2: magenta
-    //     rgb_matrix_set_color_all(0xFF, 0x00, 0xFF); // fn2: magenta
-    // } else if (IS_LAYER_ON(_BASE_AAPL)) {
-    //     dprint("aapl");
-    //     rgb_matrix_set_color(led_num, 0xFF, 0x00, 0x00); // apple: red
-    //     rgb_matrix_set_color_all(0xFF, 0x00, 0x00); // apple: red
-    // } else if (IS_LAYER_ON(_BASE)) {
-    //     dprint("base");
-    //     rgb_matrix_set_color(led_num, 0x00, 0xFF, 0x00); // base: green
-    //     rgb_matrix_set_color_all(0x00, 0xFF, 0x00); // base: green
-    // } else {
-    //     rgb_matrix_set_color(led_num, 0xFF, 0xFF, 0xFF); // white
-    //     rgb_matrix_set_color_all(0xFF, 0xFF, 0xFF); // white
-    // }
-    // return true;
-
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+        case RGB_TOG:
+            if (record->event.pressed) {
+                // When toggling RGB on/off, also switch back to the empty_effect, which allows custom RGB code to take effect.
+                rgb_matrix_toggle();
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_empty_effect);
+            }
+            return false;
+            break;
+    }
+    return true;
+}
 
 void keyboard_post_init_user(void) {
     // rgb_matrix_enable();
@@ -193,8 +109,10 @@ void keyboard_post_init_user(void) {
     debug_keyboard=false;
     debug_mouse=false;
 
+    // Set to empty_effect on boot.
     rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_empty_effect);
 
+    // Set to base layer on boot. Explicitly call this to set LED indicator state.
     layer_clear();
     layer_on(_BASE);
 }
